@@ -19,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/product")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
 public class ProductoController {
     @Autowired
     private ProductService productService;
@@ -28,6 +29,16 @@ public class ProductoController {
         return productService.getAllProctCategory();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getCategryById(@PathVariable("id") int id){
+        Product product = productService.getProductById(id);
+        return new ResponseEntity<>(product,HttpStatus.OK);
+    }
+    @GetMapping("/categoria/{id}")
+    public ResponseEntity<Category> getCategoryByProductId(@PathVariable("id") int id){
+        Category category = productService.getCateogoriaByProductId(id);
+        return new ResponseEntity<>(category,HttpStatus.OK);
+    }
     @GetMapping
     public List<Product> getAllProducts() { return productService.getAllProducts(); }
 

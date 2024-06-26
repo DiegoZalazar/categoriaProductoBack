@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/category")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT})
 public class CategoryController {
     private final CategoryService categoryService;
     public CategoryController(CategoryService categoryService){
@@ -24,7 +25,7 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Category> getCategryById(@PathVariable("id") int id){
         Category category = categoryService.getCategoryById(id);
         if(category!=null)

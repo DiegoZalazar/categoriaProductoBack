@@ -36,6 +36,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductById(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Category getCateogoriaByProductId(int id) {
+        Product product = repository.findById(id).orElse(null);
+        return product != null ? product.getIdCategoria() : null;
+    }
+
+    @Override
     public Product saveProduct(RequestProduct product) {
         Category category = categoryRepository.findById(product.idCategoria).orElse(null);
         if(category == null)
